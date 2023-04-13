@@ -4,6 +4,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import PublicIcon from "@mui/icons-material/Public";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import theme from "../../theme/theme";
+import { TruncatedTypography } from "../styled/Typographies";
 
 type JobCardProps = {
   job: {
@@ -39,14 +40,12 @@ const JobCard: React.FC<JobCardProps> = (props) => {
   const { job } = props;
 
   return (
-    <Card>
-      <CardContent sx={{ display: "flex" }}>
-        <CenteredBox sx={{ height: "100px", width: "100px" }}>
-          <BusinessIcon />
-        </CenteredBox>
+    <Card sx={{width: "100%"}}>
+      <CardContent sx={{ display: "flex"}}>
+          <BusinessIcon sx={{width: "70px", height:"auto", mx: 2}}/>
+   
         <Box
           sx={{
-            width: "100%",
             height: "100px",
             display: "flex",
             alignItems: "start",
@@ -57,22 +56,21 @@ const JobCard: React.FC<JobCardProps> = (props) => {
           <Typography variant="button" color="primary">
             {job.company_name}
           </Typography>
-          <Typography variant="h2" color="primary">
-            {job.title}
-          </Typography>
+
+         <TruncatedTypography text={job.title} color="primary" variant="h2" maxWidth="50vw"/>
 
           {job.remote && (
-            <Typography variant="button" color="primary">
+            <Typography variant="button" color="primary" noWrap>
               Remote
             </Typography>
           )}
 
           <BetweenBox>
-            <Typography variant="button" color={theme.palette.primary.light}>
+            <Typography variant="button" color={theme.palette.primary.light} noWrap>
               <PublicIcon fontSize="small" />
               {job.location}
             </Typography>
-            <Typography variant="button" color={theme.palette.primary.light}>
+            <Typography variant="button" color={theme.palette.primary.light} noWrap>
               <AccessTimeIcon fontSize="small" />
               {job.created_at.toString().split("").slice(0, 2).join("")}
             </Typography>

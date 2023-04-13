@@ -5,6 +5,9 @@ import githubJobs from "./api/githubJobs";
 import JobList from "./components/JobList/JobList";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Filter from "./components/Filter/Filter";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import JobPage from "./pages/JobPage";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -33,14 +36,12 @@ function App() {
 
   return (
     <Container>
-      <Navbar />
-      <SearchBar />
-      <Filter />
-      {!errorMessage ? (
-        <JobList jobs={jobs} />
-      ) : (
-        <Typography variant="body1">{errorMessage}</Typography>
-      )}
+       <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/job/:id" element={<JobPage />} />
+      </Routes>
+     
     </Container>
   );
 }
