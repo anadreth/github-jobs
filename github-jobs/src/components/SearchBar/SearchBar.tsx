@@ -6,9 +6,15 @@ import background from "./../../assets/searchBackground.jpeg";
 import theme from "../../theme/theme";
 import { useState } from "react";
 
-const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
+interface SearchBarTypes {
+  searchText: string
+  setSearchText: React.Dispatch<React.SetStateAction<string>>
+  handleSearchBar: () => void
+}
 
+
+const SearchBar = ({handleSearchBar, searchText, setSearchText}: SearchBarTypes) => {
+  
   return (
     <CenteredBox
       sx={{
@@ -38,6 +44,7 @@ const SearchBar = () => {
               size="large"
               variant="contained"
               color="secondary"
+              onClick={handleSearchBar}
               sx={{ zIndex: 100, py: "14px" }}
             >
               Search

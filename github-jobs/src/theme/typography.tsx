@@ -42,5 +42,11 @@ export const typography= {
         fontWeight: 700,
         fontSize: "24px",
         lineHeight: "28px"
+    },
+    body2: {
+        fontFamily: "Poppins",
+        fontWeight: 700,
+        fontSize: "14px",
+        lineHeight: "21px"
     }
   }

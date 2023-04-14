@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <NavBox>
       <Typography variant="h1">
-        Github <span style={{fontWeight: 300}}>Jobs</span>
+        Github <span style={{fontWeight: 300}}>Jobs De</span>
       </Typography>
     </NavBox>
   );

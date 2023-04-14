@@ -1,25 +1,26 @@
-import { Checkbox, Radio } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import {
   Box,
-  TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
-import { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
+import theme from "../../theme/theme";
+import LocationFilter from "./LocationFilter";
+import { JobType } from "../JobList/JobList";
 
-const Filter = () => {
-  const [checked, setChecked] = useState<boolean>(false);
-  const [cityValue, setCityValue] = useState<string>("");
+interface FilterTypes {
+  checked: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  jobs: JobType[];
+  handleLocationRadioFilter: (event: React.ChangeEvent<HTMLInputElement> | SyntheticEvent<Element, Event>, checked: boolean) => void
+}
+
+const Filter = ({ checked, setChecked, jobs, handleRadioChange }: FilterTypes) => {
+
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-  };
-
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCityValue(event?.target.value);
   };
 
   return (
@@ -36,43 +37,7 @@ const Filter = () => {
           label="Remote"
         />
       </FormGroup>
-
-      <FormControl fullWidth>
-        <FormLabel sx={{ pt: 1, pb: 2 }} children="LOCATION" />
-        <TextField
-          variant="outlined"
-          label="City, state, country..."
-          color="secondary"
-          fullWidth
-        ></TextField>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          name="radio-buttons-group"
-          value={cityValue}
-          onChange={handleRadioChange}
-        >
-          <FormControlLabel
-            value="rosenberg"
-            control={<Radio color="secondary" />}
-            label="Rosenberg"
-          />
-          <FormControlLabel
-            value="london"
-            control={<Radio color="secondary" />}
-            label="London"
-          />
-          <FormControlLabel
-            value="prague"
-            control={<Radio color="secondary" />}
-            label="Prague"
-          />
-          <FormControlLabel
-            value="bratislava"
-            control={<Radio color="secondary" />}
-            label="Bratislava"
-          />
-        </RadioGroup>
-      </FormControl>
+      <LocationFilter jobs={jobs} handleLocationRadioFilter={handleRadioChange}/>
     </Box>
   );
 };

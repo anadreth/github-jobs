@@ -4,8 +4,9 @@ import { useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import { Pagination } from "@mui/material";
 import { CenteredBox } from "../styled/Boxes";
+import { Link } from "react-router-dom";
 
-type JobType = {
+export type JobType = {
   slug: string;
   company_name: string;
   title: string;
@@ -29,10 +30,15 @@ const JobList = ({ jobs }: JobListTypes) => {
   const count = Math.ceil(jobs.length / PER_PAGE);
   const _DATA = usePagination(jobs, PER_PAGE);
 
-  const handlePaginationCount = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePaginationCount = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setCurrentPage(page);
     _DATA.jump(page);
   };
+
+  //JOB SLUG === unique ID
 
   return (
     <Box>
@@ -49,6 +55,8 @@ const JobList = ({ jobs }: JobListTypes) => {
           page={currentPage}
           siblingCount={screen.width > 400 ? 1 : 0}
           onChange={handlePaginationCount}
+          color="secondary"
+          shape="rounded"
         />
       </CenteredBox>
     </Box>
@@ -56,5 +64,3 @@ const JobList = ({ jobs }: JobListTypes) => {
 };
 
 export default JobList;
-
-//dangerouslySetInnerHTML={{ __html: item["description"] }}

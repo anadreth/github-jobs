@@ -18,3 +18,9 @@ export const BetweenBox = styled(Box)({
 export const CenteredBox = styled(BetweenBox)({
     justifyContent: "center",
 })
+
+export const AroundBox = styled(Box)({
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "start"
+})

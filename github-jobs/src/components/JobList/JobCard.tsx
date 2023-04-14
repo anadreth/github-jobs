@@ -1,10 +1,11 @@
-import { Card, CardContent, Box, Typography } from "@mui/material";
-import { BetweenBox, CenteredBox } from "../styled/Boxes";
+import { Card, CardContent, Box, Typography, IconButton } from "@mui/material";
+import { BetweenBox } from "../styled/Boxes";
 import BusinessIcon from "@mui/icons-material/Business";
 import PublicIcon from "@mui/icons-material/Public";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import theme from "../../theme/theme";
 import { TruncatedTypography } from "../styled/Typographies";
+import IconWithText from "../Details/IconWithText";
+import { Link } from "react-router-dom";
 
 type JobCardProps = {
   job: {
@@ -39,46 +40,63 @@ const defaultProps: JobCardProps = {
 const JobCard: React.FC<JobCardProps> = (props) => {
   const { job } = props;
 
+  const daysAgo = job.created_at.toString().split("").slice(0, 2).join("");
+
   return (
-    <Card sx={{width: "100%"}}>
-      <CardContent sx={{ display: "flex"}}>
-          <BusinessIcon sx={{width: "70px", height:"auto", mx: 2}}/>
-   
-        <Box
-          sx={{
-            height: "100px",
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "space-between",
-            flexDirection: "column",
-          }}
+    <Card sx={{ width: "100%" }} color="secondary">
+      <Link to={`${job.slug}`} state={{ from: job }} style={{textDecoration: "none" }}>
+        <CardContent
+          sx={{ display: "flex", width: "100%" }}
         >
-          <Typography variant="button" color="primary">
-            {job.company_name}
-          </Typography>
+          <BusinessIcon
+            sx={{ width: "70px", height: "auto", mx: 2, color: "black" }}
+          />
 
-         <TruncatedTypography text={job.title} color="primary" variant="h2" maxWidth="50vw"/>
+          <Box
+            sx={{
+              height: "100px",
+              display: "flex",
+              alignItems: "start",
+              justifyContent: "space-between",
+              flexDirection: "column",
+            }}
+          >
+            <Typography variant="button" color="primary">
+              {job.company_name}
+            </Typography>
 
-          {job.remote && (
-            <Typography variant="button" color="primary" noWrap>
-              Remote
-            </Typography>
-          )}
+            <TruncatedTypography
+              text={job.title}
+              color="primary"
+              variant="h2"
+              maxWidth="50vw"
+            />
 
-          <BetweenBox>
-            <Typography variant="button" color={theme.palette.primary.light} noWrap>
-              <PublicIcon fontSize="small" />
-              {job.location}
-            </Typography>
-            <Typography variant="button" color={theme.palette.primary.light} noWrap>
-              <AccessTimeIcon fontSize="small" />
-              {job.created_at.toString().split("").slice(0, 2).join("")}
-            </Typography>
-          </BetweenBox>
-        </Box>
-      </CardContent>
+            {job.remote && (
+              <Typography variant="button" color="primary">
+                Remote
+              </Typography>
+            )}
+
+            <BetweenBox>
+              <IconWithText
+                text={job.location}
+                icon={<PublicIcon fontSize="small" />}
+              />
+              <IconWithText
+                text={
+                  daysAgo === "1" ? daysAgo + "day ago" : daysAgo + "days ago"
+                }
+                icon={<AccessTimeIcon fontSize="small" />}
+              />
+            </BetweenBox>
+          </Box>
+        </CardContent>
+      </Link>
     </Card>
   );
 };
+
+JobCard.defaultProps = defaultProps;
 
 export default JobCard;
