@@ -55,7 +55,7 @@ const LocationFilter = ({ jobs, handleLocationRadioFilter }: LocationFilterTypes
         <FormControlLabel
             key="none"
             value=""
-            control={<Radio color="secondary" value="" />}
+            control={<Radio color="secondary" value=""/>}
             label="No location"
             onChange={handleLocationRadioFilter}
           />

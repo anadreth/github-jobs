@@ -7,6 +7,7 @@ import githubJobs from "../api/githubJobs";
 import { JobType } from "./../components/JobList/JobList";
 
 const Home = () => {
+
   const [jobs, setJobs] = useState<JobType[]>([]);
   const [queriedJobs, setQueriedJobs] = useState<JobType[]>([]);
   const [checked, setChecked] = useState<boolean>(false);
